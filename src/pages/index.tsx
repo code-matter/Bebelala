@@ -71,7 +71,7 @@ export default function Home() {
             <Input />
           </Form.Item>
           <Form.Item name="social" label="Instagram Handle">
-            <Input />
+            <Input prefix="@" />
           </Form.Item>
           <Form.Item name="date" label="Date">
             <Calendar
