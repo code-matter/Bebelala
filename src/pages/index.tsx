@@ -29,7 +29,17 @@ export default function Home() {
   };
 
   const handleSubmit = (value: any) => {
-    console.log({ ...value, date: dates });
+    const body = {
+      ...value,
+      date: dates.map((d: Dayjs) => d.format("YYYY-MM-DD"))
+    };
+    window.open(
+      `mailto:caissy.alex@gmail.com?subject=Test Guest Email&body=${JSON.stringify(
+        body
+      )}`,
+      "_blank",
+      "scrollbars=yes,resizable=yes,width=10,height=10"
+    );
   };
 
   const [isHydrated, loader] = useWaitForHydration();
