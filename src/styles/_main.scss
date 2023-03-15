@@ -1,8 +1,18 @@
 .main {
+  background-color: #fff2f4;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-flow: column nowrap;
   padding: 40px 60px;
+  .logo {
+    display: flex;
+    align-items: center;
+    margin: -20px 0;
+    h1 {
+      color: #ff5791;
+    }
+  }
   form {
     width: 50%;
     .date-container {
