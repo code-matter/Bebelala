@@ -75,14 +75,14 @@ export const THEME = {
   hashed: false,
 
   token: {
-    colorPrimary: "#FF5791",
+    colorPrimary: "#FF579133",
     controlHeight: 30,
     fontFamily: "Avenir, sans-serif",
     fontSize: 14,
-    fontWeight: 500,
-    lineWidth: 0.5,
+    fontWeight: 600,
     fontWeightStrong: 700,
-    colorTextHeading: "#000000"
+    colorTextHeading: "#00000088",
+    lineWidth: 0
   },
 
   components: {
@@ -90,17 +90,36 @@ export const THEME = {
     DatePicker: {},
     Button: {
       borderRadius: 4,
-      colorText: "#000000",
-      colorBgContainer: "#FF579155",
-      colorBorder: colors.grey[1],
+      colorText: "#00000067",
+      colorBgContainer: "#FF579133",
       lineWidth: 0
     },
     Input: {
-      controlOutline: "#FFCADC44",
+      // controlOutline: "#FFCADC44",
+      // controlOutlineWidth: 0,
+      colorText: "#00000067",
+      colorBgContainer: "#FFCADC44",
+      borderRadius: 4
+    },
+    Radio: {
+      // controlOutline: "#FFCADC44",
       controlOutlineWidth: 0,
       colorText: "#FF5791",
       colorBgContainer: "#FFCADC44",
-      colorBorder: "#FF5791",
+      borderRadius: 4
+    },
+    Select: {
+      // controlOutline: "#FFCADC44",
+      // controlOutlineWidth: 0,
+      colorText: "#FF5791",
+      colorBgContainer: "#FFCADC44",
+      borderRadius: 4
+    },
+    Calendar: {
+      // controlOutline: "#FFCADC44",
+      // controlOutlineWidth: 0,
+      colorText: "#FF5791",
+      colorBgContainer: "#FFCADC22",
       borderRadius: 4
     }
   }
