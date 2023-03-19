@@ -1,5 +1,13 @@
 import useWaitForHydration from "@/hooks/useWaitForHydration";
-import { Button, Calendar, DatePicker, Form, Input } from "antd";
+import {
+  Button,
+  Calendar,
+  Checkbox,
+  DatePicker,
+  Form,
+  Input,
+  Select
+} from "antd";
 import { Dayjs } from "dayjs";
 import Head from "next/head";
 import Image from "next/image";
@@ -10,6 +18,10 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { IncomingMessage } from "http";
 import { NextApiRequestQuery } from "next/dist/server/api-utils";
 import { useTranslation } from "next-i18next";
+import enUS from "antd/locale/en_US";
+import frCA from "antd/locale/fr_CA";
+import { Locale } from "antd/lib/locale";
+import { AdditionalPickerLocaleLangProps } from "antd/lib/date-picker/generatePicker";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -42,13 +54,14 @@ export default function Home() {
       ...value,
       date: dates.map((d: Dayjs) => d.format("YYYY-MM-DD"))
     };
-    window.open(
-      `mailto:caissy.alex@gmail.com?subject=Test Guest Email&body=${JSON.stringify(
-        body
-      )}`,
-      "_blank",
-      "scrollbars=yes,resizable=yes,width=10,height=10"
-    );
+    // window.open(
+    //   `mailto:caissy.alex@gmail.com?subject=Test Guest Email&body=${JSON.stringify(
+    //     body
+    //   )}`,
+    //   "_blank",
+    //   "scrollbars=yes,resizable=yes,width=10,height=10"
+    // );
+    console.log(value);
   };
 
   const [isHydrated, loader] = useWaitForHydration();
@@ -108,6 +121,47 @@ export default function Home() {
                 </div>
               )}
             />
+          </Form.Item>
+          <Form.Item name="gloves" label="Glove Size">
+            <Select
+              options={[
+                { label: "XS", value: "xs" },
+                { label: "S", value: "s" },
+                { label: "M", value: "m" },
+                { label: "L", value: "l" },
+                { label: "XL", value: "xl" }
+              ]}
+            />
+          </Form.Item>
+          <Form.Item name="price" label="Price" valuePropName="checked">
+            <div>
+              <h2>
+                Ipsum enim et laboris deserunt incididunt ea adipisicing nulla
+                enim adipisicing nostrud. Veniam ad enim cupidatat elit.
+                Exercitation exercitation duis fugiat aute consequat pariatur et
+                eu labore culpa ullamco pariatur amet. Ad excepteur duis est ut
+                ut do ipsum irure ullamco eu nisi do aliquip excepteur. Nisi
+                labore ad irure veniam. Nostrud laboris elit enim minim mollit
+                sunt id ea aliqua. Esse et laborum anim exercitation officia
+                ullamco eiusmod sint. Elit pariatur dolore labore cillum
+                excepteur consequat officia anim enim officia. Ea adipisicing
+                duis officia deserunt eu tempor non. Minim dolore irure non do
+                occaecat.
+              </h2>
+              <Checkbox>J'ai lu et j'acceptes</Checkbox>
+            </div>
+          </Form.Item>
+          <Form.Item
+            name="current_tattoo_location"
+            label="Current Tattoo Location"
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item name="hear_from_us" label="Where did you hear from us">
+            <Input />
+          </Form.Item>
+          <Form.Item name="extra" label="Additional Information">
+            <Input.TextArea />
           </Form.Item>
           <Button htmlType="submit">Submit</Button>
         </Form>
