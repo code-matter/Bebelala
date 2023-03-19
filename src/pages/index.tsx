@@ -3,13 +3,21 @@ import { Button, Calendar, DatePicker, Form, Input } from "antd";
 import { Dayjs } from "dayjs";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { IncomingMessage } from "http";
+import { NextApiRequestQuery } from "next/dist/server/api-utils";
+import { useTranslation } from "next-i18next";
 
 export default function Home() {
+  const { t } = useTranslation();
   const [dates, setDates] = useState<any>([]);
   const [currentDate, setCurrentDate] = useState<Dayjs>();
   const [form] = Form.useForm();
-  console.log("dates", dates);
+  const router = useRouter();
+
   const handleDateSelect = (date: Dayjs) => {
     if (!date) return;
     setCurrentDate(date);
@@ -103,7 +111,24 @@ export default function Home() {
           </Form.Item>
           <Button htmlType="submit">Submit</Button>
         </Form>
+        <Link href="/" locale={router.locale === "en" ? "fr" : "en"}>
+          {router.locale}
+        </Link>
       </main>
     </>
   );
+}
+
+interface ServerSideProps extends IncomingMessage {
+  locale: string;
+  query?: NextApiRequestQuery;
+}
+
+export async function getStaticProps({ locale }: ServerSideProps) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"]))
+      // Will be passed to the page component as props
+    }
+  };
 }

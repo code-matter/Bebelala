@@ -23,13 +23,14 @@
         justify-content: center;
         align-items: center;
         span {
-          width: 30px;
-          height: 30px;
-          background-color: red;
+          width: 25px;
+          height: 25px;
+          background-color: #ff5791;
           border-radius: 4px;
           display: flex;
           align-items: center;
           justify-content: center;
+          color: rgb(255, 227, 249);
         }
       }
     }
