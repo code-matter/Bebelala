@@ -1,3 +1,19 @@
 {
-  "guest": "Invité(e)s"
+  "guest": "Invité(e)s",
+  "form": {
+    "lastName": "Nom de famille",
+    "firstName": "Prénom",
+    "pronouns": "Pronoms",
+    "email": "Courriel",
+    "phone": "Téléphone",
+    "social": "Votre Instagram",
+    "date": "Date",
+    "gloves": "Grandeur de gants",
+    "price": "Prix",
+    "current_tattoo_location": "Où tattouez-vous en ce moment ?",
+    "hear_from_us": "Où avez-vous entendu parler de nous ?",
+    "extra": "Informations additionnelles",
+    "submit": "Soummettre",
+    "read_accept": "J'ai lu et j'accepte"
+  }
 }

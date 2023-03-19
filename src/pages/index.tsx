@@ -82,25 +82,25 @@ export default function Home() {
           <h1>Sheet</h1>
         </div>
         <Form layout="vertical" onFinish={handleSubmit} form={form}>
-          <Form.Item name="lastName" label="Last Name">
+          <Form.Item name="lastName" label={t("form.lastName")}>
             <Input />
           </Form.Item>
-          <Form.Item name="firstName" label="First Name">
+          <Form.Item name="firstName" label={t("form.firstName")}>
             <Input />
           </Form.Item>
-          <Form.Item name="pronouns" label="Pronouns">
+          <Form.Item name="pronouns" label={t("form.pronouns")}>
             <Input />
           </Form.Item>
-          <Form.Item name="email" label="Email">
+          <Form.Item name="email" label={t("form.email")}>
             <Input />
           </Form.Item>
-          <Form.Item name="phone" label="Cellphone">
+          <Form.Item name="phone" label={t("form.phone")}>
             <Input />
           </Form.Item>
-          <Form.Item name="social" label="Instagram Handle">
+          <Form.Item name="social" label={t("form.social")}>
             <Input prefix="@" />
           </Form.Item>
-          <Form.Item name="date" label="Date">
+          <Form.Item name="date" label={t("form.date")}>
             <Calendar
               value={currentDate}
               fullscreen={false}
@@ -122,7 +122,7 @@ export default function Home() {
               )}
             />
           </Form.Item>
-          <Form.Item name="gloves" label="Glove Size">
+          <Form.Item name="gloves" label={t("form.gloves")}>
             <Select
               options={[
                 { label: "XS", value: "xs" },
@@ -133,7 +133,11 @@ export default function Home() {
               ]}
             />
           </Form.Item>
-          <Form.Item name="price" label="Price" valuePropName="checked">
+          <Form.Item
+            name="price"
+            label={t("form.price")}
+            valuePropName="checked"
+          >
             <div>
               <h2>
                 Ipsum enim et laboris deserunt incididunt ea adipisicing nulla
@@ -148,22 +152,22 @@ export default function Home() {
                 duis officia deserunt eu tempor non. Minim dolore irure non do
                 occaecat.
               </h2>
-              <Checkbox>J'ai lu et j'acceptes</Checkbox>
+              <Checkbox>{t("form.read_accept")}</Checkbox>
             </div>
           </Form.Item>
           <Form.Item
             name="current_tattoo_location"
-            label="Current Tattoo Location"
+            label={t("form.current_tattoo_location")}
           >
             <Input />
           </Form.Item>
-          <Form.Item name="hear_from_us" label="Where did you hear from us">
+          <Form.Item name="hear_from_us" label={t("form.hear_from_us")}>
             <Input />
           </Form.Item>
-          <Form.Item name="extra" label="Additional Information">
+          <Form.Item name="extra" label={t("form.extra")}>
             <Input.TextArea />
           </Form.Item>
-          <Button htmlType="submit">Submit</Button>
+          <Button htmlType="submit">{t("form.submit")}</Button>
         </Form>
         <Link href="/" locale={router.locale === "en" ? "fr" : "en"}>
           {router.locale}

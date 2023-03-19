@@ -1,3 +1,19 @@
 {
-  "guest": "Guest"
+  "guest": "Guest",
+  "form": {
+    "lastName": "Last Name",
+    "firstName": "First Name",
+    "pronouns": "Pronouns",
+    "email": "Email",
+    "phone": "Phone",
+    "social": "Instagram Handle",
+    "date": "Date",
+    "gloves": "Gloves size",
+    "price": "Price",
+    "current_tattoo_location": "Where are you tattoing currently ?",
+    "hear_from_us": "How did you hear about us ?",
+    "extra": "Additional Information",
+    "submit": "Submit",
+    "read_accept": "I have read and I agree"
+  }
 }
