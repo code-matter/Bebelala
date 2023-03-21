@@ -6,7 +6,7 @@ import {
   DatePicker,
   Form,
   Input,
-  Select
+  Select,
 } from "antd";
 import { Dayjs } from "dayjs";
 import Head from "next/head";
@@ -52,7 +52,7 @@ export default function Home() {
   const handleSubmit = (value: any) => {
     const body = {
       ...value,
-      date: dates.map((d: Dayjs) => d.format("YYYY-MM-DD"))
+      date: dates.map((d: Dayjs) => d.format("YYYY-MM-DD")),
     };
     // window.open(
     //   `mailto:caissy.alex@gmail.com?subject=Test Guest Email&body=${JSON.stringify(
@@ -77,101 +77,122 @@ export default function Home() {
       </Head>
       <main className="main">
         <div className="logo">
-          <h1>Guest</h1>
-          <Image src="/logo.png" width={100} height={100} alt="logo" />
-          <h1>Sheet</h1>
+          <span>
+            <h1>Guest</h1>
+            <Image src="/logo.svg" width={335} height={200} alt="logo" />
+            <h1>Sheet</h1>
+          </span>
+          <Link href="/" locale={router.locale === "en" ? "fr" : "en"}>
+            {router.locale === "en" ? "fr" : "en"}
+          </Link>
         </div>
         <Form layout="vertical" onFinish={handleSubmit} form={form}>
-          <Form.Item name="lastName" label={t("form.lastName")}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="firstName" label={t("form.firstName")}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="pronouns" label={t("form.pronouns")}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="email" label={t("form.email")}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="phone" label={t("form.phone")}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="social" label={t("form.social")}>
-            <Input prefix="@" />
-          </Form.Item>
-          <Form.Item name="date" label={t("form.date")}>
-            <Calendar
-              value={currentDate}
-              fullscreen={false}
-              onPanelChange={(e) => setCurrentDate(undefined)}
-              onSelect={(date) => handleDateSelect(date)}
-              dateFullCellRender={(date: Dayjs) => (
-                <div
-                  className={`date-container ${
-                    dates.find(
-                      (d: Dayjs) =>
-                        d.format("YYYY-MM-DD") === date.format("YYYY-MM-DD")
-                    )
-                      ? "selected"
-                      : ""
-                  }`}
-                >
-                  <span>{date.get("date")}</span>
-                </div>
-              )}
-            />
-          </Form.Item>
-          <Form.Item name="gloves" label={t("form.gloves")}>
-            <Select
-              options={[
-                { label: "XS", value: "xs" },
-                { label: "S", value: "s" },
-                { label: "M", value: "m" },
-                { label: "L", value: "l" },
-                { label: "XL", value: "xl" }
-              ]}
-            />
-          </Form.Item>
-          <Form.Item
-            name="price"
-            label={t("form.price")}
-            valuePropName="checked"
-          >
-            <div>
-              <h2>
-                Ipsum enim et laboris deserunt incididunt ea adipisicing nulla
-                enim adipisicing nostrud. Veniam ad enim cupidatat elit.
-                Exercitation exercitation duis fugiat aute consequat pariatur et
-                eu labore culpa ullamco pariatur amet. Ad excepteur duis est ut
-                ut do ipsum irure ullamco eu nisi do aliquip excepteur. Nisi
-                labore ad irure veniam. Nostrud laboris elit enim minim mollit
-                sunt id ea aliqua. Esse et laborum anim exercitation officia
-                ullamco eiusmod sint. Elit pariatur dolore labore cillum
-                excepteur consequat officia anim enim officia. Ea adipisicing
-                duis officia deserunt eu tempor non. Minim dolore irure non do
-                occaecat.
-              </h2>
-              <Checkbox>{t("form.read_accept")}</Checkbox>
+          <section>
+            <div className="flow">
+              <Form.Item name="lastName" label={t("form.lastName")}>
+                <Input />
+              </Form.Item>
+              <Form.Item name="firstName" label={t("form.firstName")}>
+                <Input />
+              </Form.Item>
             </div>
-          </Form.Item>
-          <Form.Item
-            name="current_tattoo_location"
-            label={t("form.current_tattoo_location")}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item name="hear_from_us" label={t("form.hear_from_us")}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="extra" label={t("form.extra")}>
-            <Input.TextArea />
-          </Form.Item>
+            <div className="flow">
+              <Form.Item name="pronouns" label={t("form.pronouns")}>
+                <Input />
+              </Form.Item>
+              <Form.Item name="email" label={t("form.email")}>
+                <Input />
+              </Form.Item>
+            </div>
+            <div className="flow">
+              <Form.Item name="phone" label={t("form.phone")}>
+                <Input />
+              </Form.Item>
+              <Form.Item name="social" label={t("form.social")}>
+                <Input prefix="@" />
+              </Form.Item>
+            </div>
+          </section>
+          <section>
+            <Form.Item name="date" label={t("form.date")}>
+              <Calendar
+                value={currentDate}
+                fullscreen={false}
+                onPanelChange={(e) => setCurrentDate(undefined)}
+                onSelect={(date) => handleDateSelect(date)}
+                dateFullCellRender={(date: Dayjs) => (
+                  <div
+                    className={`date-container ${
+                      dates.find(
+                        (d: Dayjs) =>
+                          d.format("YYYY-MM-DD") === date.format("YYYY-MM-DD")
+                      )
+                        ? "selected"
+                        : ""
+                    }`}
+                  >
+                    <span>{date.get("date")}</span>
+                  </div>
+                )}
+              />
+            </Form.Item>
+
+            <div className="flow-column">
+              <Form.Item name="gloves" label={t("form.gloves")}>
+                <Select
+                  options={[
+                    { label: "XS", value: "xs" },
+                    { label: "S", value: "s" },
+                    { label: "M", value: "m" },
+                    { label: "L", value: "l" },
+                    { label: "XL", value: "xl" },
+                  ]}
+                />
+              </Form.Item>
+              <Form.Item
+                name="price"
+                label={t("form.price")}
+                valuePropName="checked"
+              >
+                <div>
+                  <h3>
+                    Ipsum enim et laboris deserunt incididunt ea adipisicing
+                    nulla enim adipisicing nostrud. Veniam ad enim cupidatat
+                    elit. Exercitation exercitation duis fugiat aute consequat
+                    pariatur et eu labore culpa ullamco pariatur amet. Ad
+                    excepteur duis est ut ut do ipsum irure ullamco eu nisi do
+                    aliquip excepteur. Nisi labore ad irure veniam. Nostrud
+                    laboris elit enim minim mollit sunt id ea aliqua. Esse et
+                    laborum anim exercitation officia ullamco eiusmod sint. Elit
+                    pariatur dolore labore cillum excepteur consequat officia
+                    anim enim officia. Ea adipisicing duis officia deserunt eu
+                    tempor non. Minim dolore irure non do occaecat.
+                  </h3>
+                  <Checkbox>{t("form.read_accept")}</Checkbox>
+                </div>
+              </Form.Item>
+            </div>
+          </section>
+          <section>
+            <div className="flow">
+              <div className="flow-column">
+                <Form.Item
+                  name="current_tattoo_location"
+                  label={t("form.current_tattoo_location")}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item name="hear_from_us" label={t("form.hear_from_us")}>
+                  <Input />
+                </Form.Item>
+              </div>
+              <Form.Item name="extra" label={t("form.extra")}>
+                <Input.TextArea />
+              </Form.Item>
+            </div>
+          </section>
           <Button htmlType="submit">{t("form.submit")}</Button>
         </Form>
-        <Link href="/" locale={router.locale === "en" ? "fr" : "en"}>
-          {router.locale}
-        </Link>
       </main>
     </>
   );
@@ -185,8 +206,8 @@ interface ServerSideProps extends IncomingMessage {
 export async function getStaticProps({ locale }: ServerSideProps) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"]))
+      ...(await serverSideTranslations(locale, ["common"])),
       // Will be passed to the page component as props
-    }
+    },
   };
 }

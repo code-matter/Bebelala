@@ -1,7 +1,7 @@
 {
   "guest": "Invité(e)s",
   "form": {
-    "lastName": "Nom de famille",
+    "lastName": "Nom",
     "firstName": "Prénom",
     "pronouns": "Pronoms",
     "email": "Courriel",

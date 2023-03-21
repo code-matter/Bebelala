@@ -99,7 +99,7 @@ export const THEME = {
       // controlOutlineWidth: 0,
       colorText: "#00000067",
       colorBgContainer: "#FFCADC44",
-      borderRadius: 4
+      borderRadius: 4,
     },
     Radio: {
       // controlOutline: "#FFCADC44",
