@@ -61,7 +61,7 @@ export default function Home() {
         .send(
           "service_u39cfkb",
           "template_bebelala",
-          value,
+          { ...value, date: JSON.stringify(dates) },
           "user_n5uFN8l3KYoh5i8GMiaKF"
         )
         .then(
