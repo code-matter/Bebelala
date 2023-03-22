@@ -7,13 +7,14 @@ import {
   Form,
   Input,
   Select,
+  message
 } from "antd";
 import { Dayjs } from "dayjs";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { IncomingMessage } from "http";
 import { NextApiRequestQuery } from "next/dist/server/api-utils";
@@ -22,6 +23,8 @@ import enUS from "antd/locale/en_US";
 import frCA from "antd/locale/fr_CA";
 import { Locale } from "antd/lib/locale";
 import { AdditionalPickerLocaleLangProps } from "antd/lib/date-picker/generatePicker";
+import emailjs from "@emailjs/browser";
+import { Feedback } from "@/utils/forms";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -29,6 +32,7 @@ export default function Home() {
   const [currentDate, setCurrentDate] = useState<Dayjs>();
   const [form] = Form.useForm();
   const router = useRouter();
+  const [messageApi, contextHolder] = message.useMessage();
 
   const handleDateSelect = (date: Dayjs) => {
     if (!date) return;
@@ -50,23 +54,32 @@ export default function Home() {
   };
 
   const handleSubmit = (value: any) => {
-    const body = {
-      ...value,
-      date: dates.map((d: Dayjs) => d.format("YYYY-MM-DD")),
-    };
-    // window.open(
-    //   `mailto:caissy.alex@gmail.com?subject=Test Guest Email&body=${JSON.stringify(
-    //     body
-    //   )}`,
-    //   "_blank",
-    //   "scrollbars=yes,resizable=yes,width=10,height=10"
-    // );
-    console.log(value);
+    const feedback = new Feedback.Async(t, messageApi);
+    console.log("value", value);
+    try {
+      emailjs
+        .send(
+          "service_u39cfkb",
+          "template_bebelala",
+          value,
+          "user_n5uFN8l3KYoh5i8GMiaKF"
+        )
+        .then(
+          () => {
+            feedback.success();
+          },
+          () => {
+            feedback.error();
+          }
+        );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const [isHydrated, loader] = useWaitForHydration();
-  if (!isHydrated) return loader;
 
+  if (!isHydrated) return loader;
   return (
     <>
       <Head>
@@ -76,6 +89,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="main">
+        {contextHolder}
         <div className="logo">
           <span>
             <h1>Guest</h1>
@@ -86,7 +100,12 @@ export default function Home() {
             {router.locale === "en" ? "fr" : "en"}
           </Link>
         </div>
-        <Form layout="vertical" onFinish={handleSubmit} form={form}>
+        <Form
+          layout="vertical"
+          onFinish={handleSubmit}
+          form={form}
+          id="form123"
+        >
           <section>
             <div className="flow">
               <Form.Item name="lastName" label={t("form.lastName")}>
@@ -145,7 +164,7 @@ export default function Home() {
                     { label: "S", value: "s" },
                     { label: "M", value: "m" },
                     { label: "L", value: "l" },
-                    { label: "XL", value: "xl" },
+                    { label: "XL", value: "xl" }
                   ]}
                 />
               </Form.Item>
@@ -206,8 +225,8 @@ interface ServerSideProps extends IncomingMessage {
 export async function getStaticProps({ locale }: ServerSideProps) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(locale, ["common"]))
       // Will be passed to the page component as props
-    },
+    }
   };
 }
