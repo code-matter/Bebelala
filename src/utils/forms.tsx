@@ -179,7 +179,6 @@ export const rules = (
   t?: TFunction<"translation", undefined, "translation">
 ) => {
   // const ruleList: TRuleList = {}
-  const translatedMessage =
-    RULES[key].message && t ? t(RULES[key].message) : null;
+  const translatedMessage = t && t(RULES[key].message);
   return { ...RULES[key], message: translatedMessage };
 };
