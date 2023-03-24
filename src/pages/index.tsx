@@ -7,9 +7,9 @@ import {
   Form,
   Input,
   Select,
-  message,
+  message
 } from "antd";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -33,6 +33,10 @@ export default function Home() {
   const [form] = Form.useForm();
   const router = useRouter();
   const [messageApi, contextHolder] = message.useMessage();
+  const [checkPrice, setCheckPrice] = useState<boolean>(false);
+  const [checkAcknowledge, setCheckAcknowledge] = useState<boolean>(false);
+  const [check18, setCheck18] = useState<boolean>(false);
+  const [checkAgreed, setCheckAgreed] = useState<boolean>(false);
 
   const handleDateSelect = (date: Dayjs) => {
     if (!date) return;
@@ -55,13 +59,21 @@ export default function Home() {
 
   const handleSubmit = (value: any) => {
     const feedback = new Feedback.Async(t, messageApi);
-    console.log("value", value);
     try {
       emailjs
         .send(
           "service_u39cfkb",
           "template_bebelala",
-          { ...value, date: JSON.stringify(dates) },
+          {
+            ...value,
+            date: dates
+              .map((date: Dayjs) => date.format("DD-MMM-YYYY"))
+              .join(" || "),
+            price: value.price ? "✔️" : "❌",
+            acknowledge: value.acknowledge ? "✔️" : "❌",
+            "18+": value["18+"] ? "✔️" : "❌",
+            agreed: value.agreed ? "✔️" : "❌"
+          },
           "user_n5uFN8l3KYoh5i8GMiaKF"
         )
         .then(
@@ -74,6 +86,13 @@ export default function Home() {
         );
     } catch (error) {
       console.log(error);
+    } finally {
+      form.resetFields();
+      setDates([]);
+      setCheckPrice(false);
+      setCheckAcknowledge(false);
+      setCheck18(false);
+      setCheckAgreed(false);
     }
   };
 
@@ -108,26 +127,50 @@ export default function Home() {
         >
           <section>
             <div className="flow">
-              <Form.Item name="lastName" label={t("form.lastName")}>
+              <Form.Item
+                name="lastName"
+                label={t("form.lastName")}
+                rules={[rules("required", t)]}
+              >
                 <Input />
               </Form.Item>
-              <Form.Item name="firstName" label={t("form.firstName")}>
+              <Form.Item
+                name="firstName"
+                label={t("form.firstName")}
+                rules={[rules("required", t)]}
+              >
                 <Input />
               </Form.Item>
             </div>
             <div className="flow">
-              <Form.Item name="pronouns" label={t("form.pronouns")}>
+              <Form.Item
+                name="pronouns"
+                label={t("form.pronouns")}
+                rules={[rules("required", t)]}
+              >
                 <Input />
               </Form.Item>
-              <Form.Item name="email" label={t("form.email")}>
+              <Form.Item
+                name="email"
+                label={t("form.email")}
+                rules={[rules("required", t)]}
+              >
                 <Input />
               </Form.Item>
             </div>
             <div className="flow">
-              <Form.Item name="phone" label={t("form.phone")}>
+              <Form.Item
+                name="phone"
+                label={t("form.phone")}
+                rules={[rules("required", t)]}
+              >
                 <Input />
               </Form.Item>
-              <Form.Item name="social" label={t("form.social")}>
+              <Form.Item
+                name="social"
+                label={t("form.social")}
+                rules={[rules("required", t)]}
+              >
                 <Input prefix="@" />
               </Form.Item>
             </div>
@@ -160,34 +203,44 @@ export default function Home() {
               <Form.Item name="gloves" label={t("form.gloves")}>
                 <Select
                   options={[
-                    { label: "XS", value: "xs" },
-                    { label: "S", value: "s" },
-                    { label: "M", value: "m" },
-                    { label: "L", value: "l" },
-                    { label: "XL", value: "xl" },
+                    { label: "XS", value: "XS" },
+                    { label: "S", value: "S" },
+                    { label: "M", value: "M" },
+                    { label: "L", value: "L" },
+                    { label: "XL", value: "XL" }
                   ]}
                 />
               </Form.Item>
-              <Form.Item name="gloves" label={t("form.scott_towel")}>
+              <Form.Item
+                name="scott_towel"
+                label={t("form.scott_towel")}
+                rules={[rules("required", t)]}
+              >
                 <Select
                   options={[
                     { label: t("form.blue_scott"), value: "Bleu" },
                     { label: t("form.regular_scott"), value: "Régulier" },
                     {
                       label: t("form.no_preferences"),
-                      value: "Aucune préférence",
-                    },
+                      value: "Aucune préférence"
+                    }
                   ]}
                 />
               </Form.Item>
               <Form.Item
                 name="price"
                 label={t("form.price")}
+                rules={[rules("checkbox", t)]}
                 valuePropName="checked"
               >
                 <div>
                   <h3>{t("form.price_text")}</h3>
-                  <Checkbox>{t("form.read_accept")}</Checkbox>
+                  <Checkbox
+                    onChange={() => setCheckPrice(!checkPrice)}
+                    checked={checkPrice}
+                  >
+                    {t("form.read_accept")}
+                  </Checkbox>
                 </div>
               </Form.Item>
             </div>
@@ -206,27 +259,44 @@ export default function Home() {
                 </Form.Item>
               </div>
               <Form.Item name="extra" label={t("form.extra")}>
-                <Input.TextArea />
+                <Input.TextArea autoSize={{ minRows: 4.8 }} />
               </Form.Item>
             </div>
-            <Form.Item name="acknowledge" valuePropName="checked">
-              <div>
-                <Checkbox>{t("form.acknowledge")}</Checkbox>
-              </div>
-            </Form.Item>
-            <Form.Item name="18+" valuePropName="checked">
-              <div>
-                <Checkbox>{t("form.18+")}</Checkbox>
-              </div>
+            <Form.Item
+              label={<></>}
+              valuePropName="checked"
+              name="acknowledge"
+              rules={[rules("checkbox", t)]}
+            >
+              <Checkbox
+                onChange={() => setCheckAcknowledge(!checkAcknowledge)}
+                checked={checkAcknowledge}
+              >
+                {t("form.acknowledge")}
+              </Checkbox>
             </Form.Item>
             <Form.Item
-              name="agreed"
+              label={<></>}
               valuePropName="checked"
-              //   rules={[rules("required", t)]}
+              name="18+"
+              rules={[rules("checkbox", t)]}
             >
-              <div>
-                <Checkbox>{t("form.agreed")}</Checkbox>
-              </div>
+              <Checkbox onChange={() => setCheck18(!check18)} checked={check18}>
+                {t("form.18+")}
+              </Checkbox>
+            </Form.Item>
+            <Form.Item
+              label={<></>}
+              valuePropName="checked"
+              name="agreed"
+              rules={[rules("checkbox", t)]}
+            >
+              <Checkbox
+                onChange={() => setCheckAgreed(!checkAgreed)}
+                checked={checkAgreed}
+              >
+                {t("form.agreed")}
+              </Checkbox>
             </Form.Item>
           </section>
           <Button htmlType="submit">{t("form.submit")}</Button>
@@ -244,8 +314,8 @@ interface ServerSideProps extends IncomingMessage {
 export async function getStaticProps({ locale }: ServerSideProps) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(locale, ["common"]))
       // Will be passed to the page component as props
-    },
+    }
   };
 }
