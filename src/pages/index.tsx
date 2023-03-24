@@ -7,7 +7,7 @@ import {
   Form,
   Input,
   Select,
-  message
+  message,
 } from "antd";
 import { Dayjs } from "dayjs";
 import Head from "next/head";
@@ -24,7 +24,7 @@ import frCA from "antd/locale/fr_CA";
 import { Locale } from "antd/lib/locale";
 import { AdditionalPickerLocaleLangProps } from "antd/lib/date-picker/generatePicker";
 import emailjs from "@emailjs/browser";
-import { Feedback } from "@/utils/forms";
+import { Feedback, rules } from "@/utils/forms";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -164,7 +164,19 @@ export default function Home() {
                     { label: "S", value: "s" },
                     { label: "M", value: "m" },
                     { label: "L", value: "l" },
-                    { label: "XL", value: "xl" }
+                    { label: "XL", value: "xl" },
+                  ]}
+                />
+              </Form.Item>
+              <Form.Item name="gloves" label={t("form.scott_towel")}>
+                <Select
+                  options={[
+                    { label: t("form.blue_scott"), value: "Bleu" },
+                    { label: t("form.regular_scott"), value: "Régulier" },
+                    {
+                      label: t("form.no_preferences"),
+                      value: "Aucune préférence",
+                    },
                   ]}
                 />
               </Form.Item>
@@ -174,19 +186,7 @@ export default function Home() {
                 valuePropName="checked"
               >
                 <div>
-                  <h3>
-                    Ipsum enim et laboris deserunt incididunt ea adipisicing
-                    nulla enim adipisicing nostrud. Veniam ad enim cupidatat
-                    elit. Exercitation exercitation duis fugiat aute consequat
-                    pariatur et eu labore culpa ullamco pariatur amet. Ad
-                    excepteur duis est ut ut do ipsum irure ullamco eu nisi do
-                    aliquip excepteur. Nisi labore ad irure veniam. Nostrud
-                    laboris elit enim minim mollit sunt id ea aliqua. Esse et
-                    laborum anim exercitation officia ullamco eiusmod sint. Elit
-                    pariatur dolore labore cillum excepteur consequat officia
-                    anim enim officia. Ea adipisicing duis officia deserunt eu
-                    tempor non. Minim dolore irure non do occaecat.
-                  </h3>
+                  <h3>{t("form.price_text")}</h3>
                   <Checkbox>{t("form.read_accept")}</Checkbox>
                 </div>
               </Form.Item>
@@ -209,6 +209,25 @@ export default function Home() {
                 <Input.TextArea />
               </Form.Item>
             </div>
+            <Form.Item name="acknowledge" valuePropName="checked">
+              <div>
+                <Checkbox>{t("form.acknowledge")}</Checkbox>
+              </div>
+            </Form.Item>
+            <Form.Item name="18+" valuePropName="checked">
+              <div>
+                <Checkbox>{t("form.18+")}</Checkbox>
+              </div>
+            </Form.Item>
+            <Form.Item
+              name="agreed"
+              valuePropName="checked"
+              //   rules={[rules("required", t)]}
+            >
+              <div>
+                <Checkbox>{t("form.agreed")}</Checkbox>
+              </div>
+            </Form.Item>
           </section>
           <Button htmlType="submit">{t("form.submit")}</Button>
         </Form>
@@ -225,8 +244,8 @@ interface ServerSideProps extends IncomingMessage {
 export async function getStaticProps({ locale }: ServerSideProps) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"]))
+      ...(await serverSideTranslations(locale, ["common"])),
       // Will be passed to the page component as props
-    }
+    },
   };
 }

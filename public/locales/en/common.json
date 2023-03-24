@@ -14,6 +14,28 @@
     "hear_from_us": "How did you hear about us ?",
     "extra": "Additional Information",
     "submit": "Submit",
-    "read_accept": "I have read and I agree"
+    "read_accept": "I understand and I agree",
+    "scott_towel": "Scott Towel",
+    "blue_scott": "Blue Scott Towels",
+    "regular_scott": "Regular Scott Towels",
+    "no_preferences": "No Preferences",
+    "price_text": "During a guest of one or more days, a share of 30% of the income (with a ceiling of $150) per day is requested.",
+    "acknowledge": "By coming to work at Bébélala, I understand that in addition to having access to a tattoo station, the basic equipment is provided and that I am responsible for bringing: My machine, my needles, my inks and my power supply.",
+    "18+": "I am over 18",
+    "agreed": "I certify that the information provided in the attached forms is correct."
+  },
+  "validation": {
+    "required": "This field is required.",
+    "email": "Please enter a valid email.",
+    "password": "The password should be longer than 8 characters. It should also include at least 1 letter and 1 number.",
+    "password_confirm": "Please confirm your password.",
+    "password_different": "The two given passwords are inconsistent.",
+    "latlng": "Please enter a valid location. Ex.: 00.00000000",
+    "url": "Please enter a valid URL.",
+    "phone": "Please enter a valid phone number. Ex.: (123) 123-1234",
+    "postal_code": "Please enter a valid postal code. Ex.: A1A 1A1",
+    "npa": "Please enter a valid NPA. Ex.: 111",
+    "ip": "Please enter a valid IP address. Ex.: X.X.X.X",
+    "hex": "Please enter a valid Hexadecimal value. Ex.: #000000"
   }
 }

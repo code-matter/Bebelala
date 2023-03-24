@@ -14,6 +14,28 @@
     "hear_from_us": "Où avez-vous entendu parler de nous ?",
     "extra": "Informations additionnelles",
     "submit": "Soummettre",
-    "read_accept": "J'ai lu et j'accepte"
+    "read_accept": "Je comprends et j'accepte",
+    "scott_towel": "Scott Towel",
+    "blue_scott": "Scott Towels bleus",
+    "regular_scott": "Scott Towels régulier",
+    "no_preferences": "Aucune Préference",
+    "price_text": "Lors d'un guest d'un ou plusieurs jours, une part de 30% des revenus (avec plafonds de 150$) par jour est demandée.",
+    "acknowledge": "En venant travailler chez Bébélala, je comprends qu'en plus d'avoir accès à une station de tatouage, le matériel de base est fourni et que je suis responsable d'apporter : Ma machine, mes aiguilles, mes encres et mon power supply.",
+    "18+": "J'ai plus de 18 ans",
+    "agreed": "Je certifie que les informations fournies dans les formulaires ci-joint sont justes."
+  },
+  "validation": {
+    "required": "Ce champ est obligatoire.",
+    "email": "Veuillez entrer un courriel valide.",
+    "password": "Le mot de passe doit contenir 8 caractères, au moins une lettre et un nombre.",
+    "password_confirm": "Veuillez confirmer votre mot de passe.",
+    "password_different": "Les deux mots de passe saisis sont différents.",
+    "latlng": "Veuillez entrer une localisation valide. Ex.: 00.00000000",
+    "url": "Veuillez entrer une URL valide.",
+    "phone": "Veuillez entrer un numéro de téléphone valide. Ex.: (123) 123-1234",
+    "postal_code": "Veuillez entrer un code postal valide. Ex.: A1A 1A1",
+    "npa": "Veuillez entrer un NPA valide. Ex.: 111",
+    "ip": "Veuillez entrer une adresse IP valide. Ex.: X.X.X.X",
+    "hex": "Veuillez entrer une valeur hexadécimal valide. Ex.: #000000"
   }
 }
