@@ -90,35 +90,60 @@ export default function Home() {
       </Head>
       <main className="main">
         {contextHolder}
+        <div className="title">
+          <i>
+            <h1 className="title">Guest Sheet</h1>
+          </i>
+        </div>
         <div className="logo">
-          <span>
-            <h1>Guest</h1>
-            <Image src="/logo.svg" width={335} height={200} alt="logo" />
-            <h1>Sheet</h1>
-          </span>
+          <Image src="/logo.svg" width={335} height={200} alt="logo" />
           <Link href="/" locale={router.locale === "en" ? "fr" : "en"}>
             {router.locale === "en" ? "fr" : "en"}
           </Link>
         </div>
         <Form
-          layout="vertical"
+          layout="horizontal"
           onFinish={handleSubmit}
           form={form}
           id="form123"
         >
-          <section>
+          <section className="intro">
+            <h1>VOUS DÉSIREZ VENIR TATOUÉ À NOTRE STUDIO?</h1>
+            <div>
+              <p>
+                Génial, pour effectuer votre demande de guest, veuillez remplir
+                le formulaire suivant le plus précisément possible. Ensuite,
+                nous vous enverrons une réponse par courriel concernant votre
+                demande.
+              </p>
+              <p>
+                Chez Bébélala, c’est un studio privé d’art
+                multidismultidisciplinaire appartenant à @notsoevil.ink &
+                @passelebriquet.
+              </p>
+              <p>
+                Il est situé se situe dans les Immeubles Grover, au 2065 rue
+                Parthenais local #001. C’est à 5 à 10 minutes à pieds de la
+                station de métro Frontenac dans le quartier Sainte-Marie.
+              </p>
+              <h3>
+                Au plaisir de vous accueillir lors de votre passage à Montréal !{" "}
+              </h3>
+            </div>
+          </section>
+          <section className="contact">
             <div className="flow">
-              <Form.Item name="lastName" label={t("form.lastName")}>
-                <Input />
-              </Form.Item>
               <Form.Item name="firstName" label={t("form.firstName")}>
                 <Input />
               </Form.Item>
-            </div>
-            <div className="flow">
-              <Form.Item name="pronouns" label={t("form.pronouns")}>
+              <Form.Item name="lastName" label={t("form.lastName")}>
                 <Input />
               </Form.Item>
+            </div>
+            <Form.Item name="pronouns" label={t("form.pronouns")}>
+              <Input />
+            </Form.Item>
+            <div className="flow">
               <Form.Item name="email" label={t("form.email")}>
                 <Input />
               </Form.Item>
@@ -132,7 +157,7 @@ export default function Home() {
               </Form.Item>
             </div>
           </section>
-          <section>
+          <section className="guest_spot">
             <Form.Item name="date" label={t("form.date")}>
               <Calendar
                 value={currentDate}
@@ -192,7 +217,7 @@ export default function Home() {
               </Form.Item>
             </div>
           </section>
-          <section>
+          <section className="information">
             <div className="flow">
               <div className="flow-column">
                 <Form.Item
